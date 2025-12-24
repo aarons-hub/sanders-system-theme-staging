@@ -1,0 +1,22 @@
+/**
+ * The following styles get applied inside the editor only.
+ */
+ul.sanders-system-quicklaunch {
+	h3 {
+		font-size: 18px;
+		margin: 0px;
+	}
+	list-style: none;
+	padding: 0;
+	li {
+		ul.children {
+			list-style: none;
+			padding-left: 15px;
+		}
+		a {
+			padding: 5px 15px;
+			display: block;
+			box-sizing: border-box;
+		}
+	}
+}

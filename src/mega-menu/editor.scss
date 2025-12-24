@@ -1,0 +1,15 @@
+/**
+ * The following styles get applied inside the editor only.
+ */
+
+.theme-mega-menu-wrapper .wp-block-navigation__container.theme-mega-menu-items {
+	gap: 24px;
+}
+@media (width < 600px) {
+	ul.wp-block-navigation__container.wp-block-navigation.theme-mobile-menu-items {
+		display: flex;
+	}
+	ul.wp-block-navigation__container.wp-block-navigation.theme-mega-menu-items {
+		display: none;
+	}
+}

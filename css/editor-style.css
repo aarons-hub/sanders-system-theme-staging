@@ -1,0 +1,10 @@
+.is-style-custom-flex-image img {
+	vertical-align: middle !important;
+}
+.is-style-sanders-system-gradient-bg {
+	background: var(--wp--preset--gradient--blue-to-red) !important;
+}
+:root :where(.wp-block-post-content) {
+	padding-right: var(--wp--style--root--padding-right);
+	padding-left: var(--wp--style--root--padding-left);
+}

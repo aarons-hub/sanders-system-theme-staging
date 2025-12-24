@@ -1,0 +1,41 @@
+/**
+ * The following styles get applied inside the editor only.
+ */
+/* Theme hero slideshow styles */
+.hero-wrapper {
+	.swiper-wrapper {
+		display: flex;
+		flex-direction: row;
+		gap: 40px;
+		.swiper-slide {
+			width: 33%;
+			> *,
+			> *::before,
+			> *::after {
+				box-sizing: border-box;
+				display: flex;
+			}
+			.hero-img {
+				max-height: 220px;
+				img.hero-img {
+					width: 100%;
+					height: auto;
+					object-fit: cover;
+					border-radius: 20px;
+				}
+			}
+			.hero-title {
+				margin-bottom: 5px;
+			}
+		}
+	}
+	.swiper-pagination {
+		position: relative;
+		box-sizing: border-box;
+		padding-top: 40px;
+		.swiper-pagination-bullet {
+			width: 24px;
+			height: 24px;
+		}
+	}
+}

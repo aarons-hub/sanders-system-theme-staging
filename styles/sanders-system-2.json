@@ -1,0 +1,12 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Sanders System rounded image",
+	"slug": "sanders-system-rounded-image",
+	"blockTypes": ["core/image"],
+	"styles": {
+		"border": {
+			"radius": "20px"
+		}
+	}
+}

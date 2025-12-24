@@ -1,0 +1,27 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Sanders System gradient bg",
+	"slug": "sanders-system-gradient-bg",
+	"blockTypes": ["core/columns", "core/group", "core/column"],
+	"styles": {
+		"color": {
+			"text": "var(--wp--preset--color--white)"
+		},
+		"elements": {
+			"link": {
+				"color": {
+					"text": "var(--wp--preset--color--white)"
+				}
+			}
+		},
+		"spacing": {
+			"padding": {
+				"top": "var(--wp--preset--spacing--50);",
+				"right": "var(--wp--preset--spacing--50)",
+				"bottom": "var(--wp--preset--spacing--50)",
+				"left": "var(--wp--preset--spacing--50)"
+			}
+		}
+	}
+}

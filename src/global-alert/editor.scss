@@ -1,0 +1,31 @@
+/**
+ * The following styles get applied inside the editor only.
+ */
+#global-alerts {
+	background-color: var(--wp--preset--color--accent-red);
+	color: #fff;
+	padding: 8px 16px;
+	text-align: center;
+	h3 {
+		color: #fff;
+	}
+	&.hide {
+		display: none !important;
+	}
+	.global-alerts-container {
+		display: flex;
+		flex-direction: column;
+		max-width: 1340px;
+		margin: 0px auto;
+		.global-alert-item {
+			text-align: left;
+		}
+		#close-alert {
+			display: flex;
+			justify-content: flex-end;
+			a {
+				background-color: var(--wp--preset--color--primary-blue);
+			}
+		}
+	}
+}

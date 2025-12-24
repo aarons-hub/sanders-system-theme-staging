@@ -1,0 +1,32 @@
+/*!****************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/global-alert/style.scss ***!
+  \****************************************************************************************************************************************************************************************************************************************************/
+/* Theme global alert styles */
+#global-alerts {
+  background-color: var(--wp--preset--color--accent-red);
+  color: #fff;
+  padding: 8px 16px;
+  text-align: center;
+}
+#global-alerts h3 {
+  color: #fff;
+}
+#global-alerts.hide {
+  display: none !important;
+}
+#global-alerts .global-alerts-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 1340px;
+  margin: 0px auto;
+}
+#global-alerts .global-alerts-container .global-alert-item {
+  text-align: right;
+}
+#global-alerts .global-alerts-container #close-alert {
+  display: flex;
+  justify-content: flex-end;
+}
+#global-alerts .global-alerts-container #close-alert a {
+  background-color: var(--wp--preset--color--primary-blue);
+}

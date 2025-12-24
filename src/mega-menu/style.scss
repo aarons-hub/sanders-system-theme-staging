@@ -1,0 +1,194 @@
+/* Theme mega menu styles */
+.wp-block-theme-blocks-mega-menu {
+	width: 100%;
+}
+.sanders-system-mega-menu-wrapper {
+	.wp-block-navigation.mega-menu-items {
+		list-style: none;
+		padding-left: 0px;
+		position: relative;
+		z-index: 2;
+		display: flex;
+		gap: 24px;
+		.mega-menu-item {
+			.theme-mega-menu-link {
+				text-decoration: none;
+				.wp-block-navigation-item__label {
+					font-weight: 400;
+					font-size: 16px;
+
+					font-family: var(--wp--preset--font-family--sitefont);
+					pointer-events: none;
+					color: var(--wp--preset--color--primary-blue);
+				}
+				&:hover {
+					text-decoration: underline;
+				}
+			}
+			.mega-menu-button {
+				outline-offset: 4px;
+				cursor: pointer;
+				display: block;
+				background-color: transparent;
+				border-style: none;
+				.wp-block-navigation-item__label {
+					font-weight: 400;
+					font-size: 16px;
+					font-family: var(--wp--preset--font-family--sitefont);
+					pointer-events: none;
+					color: var(--wp--preset--color--primary-blue);
+				}
+				.mega-menu-icon {
+					display: inline-block;
+					margin-left: 4px;
+					pointer-events: none;
+					transition: transform 0.3s;
+					svg {
+						width: 16px;
+						height: 8px;
+						fill: none;
+					}
+				}
+				&[aria-expanded="true"] .mega-menu-icon {
+					transform: rotate(180deg);
+				}
+				&:hover {
+					text-decoration: underline;
+					text-underline-offset: 0.6ch !important;
+				}
+			}
+			.mega-menu-content {
+				background-color: transparent;
+				color: initial;
+				height: 100%;
+				left: 0px;
+				opacity: 0;
+				overflow: hidden;
+				position: absolute;
+				top: 42px;
+				transition: opacity 0.3s linear;
+				visibility: hidden;
+				z-index: 100;
+				max-width: 1340px;
+				width: 100%;
+				.theme-mega-menu-close-button {
+					position: absolute;
+					top: 10px;
+					right: 10px;
+					width: 60px;
+					height: 60px;
+					border: 2px solid #fff;
+					background-color: var(--wp--preset--color--accent-red);
+					border-radius: 999999px;
+					transition: all 0.3s ease;
+					cursor: pointer;
+					.theme-mega-menu-close-label {
+						pointer-events: none;
+						svg {
+							transform: translateY(2px);
+						}
+					}
+					&:hover {
+						background-color: #000;
+					}
+				}
+				> div > .wp-block-group {
+					box-shadow: 0 40px 40px rgba(0, 0, 0, 0.2);
+				}
+			}
+			.mega-menu-button[aria-expanded="true"] ~ .mega-menu-content {
+				opacity: 1;
+				overflow: visible;
+				visibility: visible;
+			}
+		}
+	}
+	.wp-block-navigation__container.mobile-menu-items {
+		display: none;
+		list-style: none;
+		padding-left: 0px;
+		.theme-mobile-menu-item {
+			.mega-menu-button.mobile {
+				outline-offset: 4px;
+				cursor: pointer;
+				display: block;
+				background-color: transparent;
+				border-style: none;
+				.mega-menu-icon {
+					display: inline-block;
+					margin-left: 4px;
+					pointer-events: none;
+					svg {
+						width: 24px;
+						height: 14px;
+						fill: none;
+					}
+				}
+			}
+			.mega-menu-content {
+				background-color: initial;
+				color: initial;
+				height: 100vh;
+				opacity: 0;
+				overflow: hidden;
+				position: fixed;
+				transition: opacity 0.3s linear;
+				visibility: hidden;
+				z-index: 100;
+				width: 100vw;
+				inset: 0;
+				.theme-mega-menu-close-button {
+					position: absolute;
+					top: 10px;
+					right: 10px;
+					width: 60px;
+					height: 60px;
+					border: 2px solid #fff;
+					background-color: var(--wp--preset--color--accent-red);
+					border-radius: 999999px;
+					cursor: pointer;
+					.theme-mega-menu-close-label {
+						pointer-events: none;
+						svg {
+							transform: translateY(2px);
+						}
+					}
+					&:hover {
+						background-color: #000;
+					}
+				}
+			}
+			.mega-menu-button.mobile[aria-expanded="true"] ~ .mega-menu-content {
+				opacity: 1;
+				overflow: visible;
+				visibility: visible;
+			}
+		}
+	}
+}
+@media (width < 600px) {
+	ul.wp-block-navigation__container.wp-block-navigation.mobile-menu-items {
+		display: flex;
+	}
+	ul.wp-block-navigation__container.wp-block-navigation.mega-menu-items {
+		display: none;
+	}
+}
+
+.mega-menu-backdrop {
+	display: none;
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 2;
+	transition: opacity 0.3s;
+	opacity: 0;
+	pointer-events: none;
+	// backdrop-filter: blur(2px);
+	mix-blend-mode: multiply;
+}
+.mega-menu-backdrop.active {
+	display: block;
+	opacity: 1;
+	pointer-events: auto;
+}

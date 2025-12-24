@@ -1,0 +1,43 @@
+/*!**************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/innerpage-testimonials/style.scss ***!
+  \**************************************************************************************************************************************************************************************************************************************************************/
+/* Theme innerpage testimonials styles */
+#inner-page-testimonials.testimonial-section {
+  align-items: start;
+}
+#inner-page-testimonials.testimonial-section > *,
+#inner-page-testimonials.testimonial-section > *::before,
+#inner-page-testimonials.testimonial-section > *::after {
+  box-sizing: border-box;
+}
+#inner-page-testimonials.testimonial-section .testimonial-card {
+  display: flex;
+  flex-basis: 33%;
+  gap: 30px;
+  padding: 30px;
+  border-radius: 20px;
+  border: 1px solid var(--wp--preset--color--background-light);
+  background-color: var(--wp--preset--color--background-lighter);
+}
+#inner-page-testimonials.testimonial-section .testimonial-card .testimonial-image {
+  flex-basis: 48px;
+  flex-grow: 0;
+}
+#inner-page-testimonials.testimonial-section .testimonial-card .testimonial-image img {
+  width: 100%;
+  height: auto;
+}
+#inner-page-testimonials.testimonial-section .testimonial-card .testimonial-content {
+  flex-basis: 0;
+  flex-grow: 1;
+  padding: 0px;
+}
+#inner-page-testimonials.testimonial-section .testimonial-card .testimonial-content .blockquote {
+  padding: 0px;
+  margin: 0px;
+}
+#inner-page-testimonials.testimonial-section .testimonial-card .testimonial-content .blockquote .review-stars .star {
+  color: gold;
+}
+
+/*# sourceMappingURL=style-index.css.map*/

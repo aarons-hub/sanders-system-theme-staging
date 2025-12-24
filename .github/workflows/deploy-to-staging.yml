@@ -1,0 +1,119 @@
+name: Deploy to Staging
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      staging_repo:
+        description: "Staging repository (owner/repo)"
+        required: false
+        default: "aarons-hub/sanders-system-theme-staging"
+
+jobs:
+  deploy:
+    name: Deploy Theme to Staging
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout dev branch
+        uses: actions/checkout@v4
+        with:
+          path: dev
+          fetch-depth: 0
+
+      - name: Set staging repository
+        id: staging-repo
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ -n "${{ github.event.inputs.staging_repo }}" ]; then
+            echo "repo=${{ github.event.inputs.staging_repo }}" >> $GITHUB_OUTPUT
+          else
+            echo "repo=aarons-hub/sanders-system-theme-staging" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Remove existing staging directory (if any)
+        run: |
+          if [ -d "staging" ]; then
+            echo "Removing existing staging directory..."
+            rm -rf staging
+          fi
+
+      - name: Clone staging repository
+        env:
+          STAGING_REPO_TOKEN: ${{ secrets.DEV_REPO_TOKEN }}
+        run: |
+          if [ -z "$STAGING_REPO_TOKEN" ]; then
+            echo "Error: STAGING_REPO_TOKEN secret is not set"
+            echo "Please configure this secret in repository settings with a PAT that has 'repo' scope"
+            exit 1
+          fi
+
+          REPO="${{ steps.staging-repo.outputs.repo }}"
+
+          git config --global credential.helper store
+          echo "https://x-access-token:${STAGING_REPO_TOKEN}@github.com" > ~/.git-credentials
+          git clone https://github.com/${REPO}.git staging
+          if [ $?  -ne 0 ]; then
+            echo "Error: Failed to clone staging repository ${REPO}"
+            exit 1
+          fi
+
+      - name: Mirror dev to staging (delete all except .git)
+        run: |
+          cd staging
+          find . -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rf {} +
+          cd ..
+          rsync -av --delete --exclude='.git' dev/ staging/
+
+      - name: Commit and push to staging
+        env:
+          STAGING_REPO_TOKEN: ${{ secrets.DEV_REPO_TOKEN }}
+        run: |
+          cd staging
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "No changes to deploy"
+            exit 0
+          fi
+          git add -A
+          COMMIT_MSG="Deploy from dev branch"
+          git commit -m "${COMMIT_MSG}"
+          REMOTE_BRANCHES=$(git ls-remote --heads origin 2>/dev/null | wc -l)
+          if [ "$REMOTE_BRANCHES" -eq 0 ]; then
+            git branch -M main
+            git push -u origin main
+          else
+            DEFAULT_BRANCH=$(git remote show origin | grep 'HEAD branch' | cut -d' ' -f5)
+            if [ -z "$DEFAULT_BRANCH" ]; then
+              DEFAULT_BRANCH="main"
+            fi
+            git push origin HEAD:${DEFAULT_BRANCH}
+          fi
+          if [ $? -eq 0 ]; then
+            echo "Successfully deployed to staging!"
+            echo "Commit SHA: $(git rev-parse --short HEAD)"
+          else
+            echo "Error: Failed to push to staging repository"
+            exit 1
+          fi
+
+      - name: Deployment summary
+        if: success()
+        run: |
+          echo "## Deployment Successful!  :rocket:" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Staging Repository:** ${{ steps.staging-repo.outputs.repo }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Deployed at:** $(date -u +"%Y-%m-%d %H:%M:%S UTC")" >> $GITHUB_STEP_SUMMARY
+
+      - name: Deployment failure notification
+        if: failure()
+        run: |
+          echo "## Deployment Failed :x:" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Please check the workflow logs for details." >> $GITHUB_STEP_SUMMARY
+          echo "**Staging Repository:** ${{ steps.staging-repo.outputs.repo }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Workflow Run:** $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" >> $GITHUB_STEP_SUMMARY
