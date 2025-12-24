@@ -68,6 +68,13 @@ form.wpcf7-form.init
 	margin-left: 0;
 }
 
+.woo-custom-products {
+	display: flex;
+	gap: 10px;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
 @media (width < 600px) {
 	.hide-in-mobile {
 		display: none;
