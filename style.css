@@ -68,13 +68,6 @@ form.wpcf7-form.init
 	margin-left: 0;
 }
 
-.woo-custom-products {
-	display: flex;
-	gap: 10px;
-	flex-direction: row;
-	flex-wrap: wrap;
-}
-
 @media (width < 600px) {
 	.hide-in-mobile {
 		display: none;
@@ -83,4 +76,17 @@ form.wpcf7-form.init
 		width: 100%;
 		text-align: center;
 	}
+}
+
+.woocommerce div.product div.images .woocommerce-product-gallery__image a {
+	border-radius: 15px;
+	border: 1px solid #eee;
+	box-sizing: border-box;
+	padding: 10px;
+}
+.woocommerce div.product div.images .flex-control-thumbs li img {
+	border-radius: 10px;
+	border: 1px solid #eee;
+	padding: 10px;
+	box-sizing: border-box;
 }
