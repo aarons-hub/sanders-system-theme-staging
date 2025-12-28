@@ -10,11 +10,14 @@
 }
 #global-alerts h3 {
   color: #fff;
+  margin-top: 5px;
+  margin-bottom: 3px;
 }
 #global-alerts.hide {
   display: none !important;
 }
 #global-alerts .global-alerts-container {
+  position: relative;
   display: flex;
   flex-direction: column;
   max-width: 1340px;
@@ -23,9 +26,15 @@
 #global-alerts .global-alerts-container .global-alert-item {
   text-align: left;
 }
+#global-alerts .global-alerts-container .global-alert-item .global-alert-content p {
+  margin-top: 0px;
+  margin-bottom: 6px;
+}
 #global-alerts .global-alerts-container #close-alert {
   display: flex;
   justify-content: flex-end;
+  position: absolute;
+  right: 0;
 }
 #global-alerts .global-alerts-container #close-alert a {
   background-color: var(--wp--preset--color--primary-blue);

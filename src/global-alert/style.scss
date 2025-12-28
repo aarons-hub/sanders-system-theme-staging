@@ -6,21 +6,32 @@
 	text-align: center;
 	h3 {
 		color: #fff;
+		margin-top: 5px;
+		margin-bottom: 3px;
 	}
 	&.hide {
 		display: none !important;
 	}
 	.global-alerts-container {
+		position: relative;
 		display: flex;
 		flex-direction: column;
 		max-width: 1340px;
 		margin: 0px auto;
 		.global-alert-item {
 			text-align: left;
+			.global-alert-content {
+				p {
+					margin-top: 0px;
+					margin-bottom: 6px;
+				}
+			}
 		}
 		#close-alert {
 			display: flex;
 			justify-content: flex-end;
+			position: absolute;
+			right: 0;
 			a {
 				background-color: var(--wp--preset--color--primary-blue);
 			}

@@ -64,7 +64,7 @@
 		});
 	});
 
-	// Improved: Clone and append matching images to .wcpa_radio labels (fixes for/label and duplicate issues)
+	// Clone and append matching images to .wcpa_radio labels (fixes for/label and duplicate issues)
 	$(document).ready(function () {
 		setTimeout(function () {
 			var $thumbImages = $(".flex-control-nav.flex-control-thumbs img");
@@ -175,6 +175,25 @@
 					}
 				}
 			});
-		}, 500);
+		}, 1000);
+	});
+	// Uppercase transformation for student-name input
+	$(document).ready(function () {
+		var $studentInput = $(
+			".woocommerce .wcpa_field_wrap.student-name input[type='text']",
+		);
+		// Transform to uppercase as user types
+		$studentInput.on("input", function () {
+			var start = this.selectionStart,
+				end = this.selectionEnd;
+			this.value = this.value.toUpperCase();
+			this.setSelectionRange(start, end);
+		});
+		// Also transform to uppercase on add-to-cart button click
+		$(document).on("click", "button.single_add_to_cart_button", function () {
+			$studentInput.each(function () {
+				this.value = this.value.toUpperCase();
+			});
+		});
 	});
 })();

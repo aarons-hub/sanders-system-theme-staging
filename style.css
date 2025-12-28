@@ -1,5 +1,5 @@
 /*
-Theme Name: Sanders System v1.0 new branch
+Theme Name: Sanders System v1.0.1
 Description: Based on Twenty Twenty-Five
 Author: Aaron Sanders
 Version: 1.0.2
@@ -89,4 +89,57 @@ form.wpcf7-form.init
 	border: 1px solid #eee;
 	padding: 10px;
 	box-sizing: border-box;
+}
+.woocommerce .wcpa_field_error {
+	box-sizing: border-box;
+	padding: 10px 15px;
+	color: varr(--wp--preset--color--accent-red);
+	font-weight: bold;
+	background-color: #f4fff7;
+	border: 1px solid #4ab866;
+	border-radius: 4px;
+}
+.woocommerce .wcpa_field_wrap.student-name input[type="text"] {
+	text-transform: uppercase;
+}
+.woocommerce div.product form.cart button.single_add_to_cart_button,
+.woocommerce div.product form.cart button[name="add-to-cart"],
+.wc-block-components-button:not(.is-link) {
+	border-radius: 4px;
+}
+.wcpa_field_label {
+	font-weight: 600 !important;
+}
+.wcpa_wrap .wcpa_field_wrap {
+	margin: 0 0 30px;
+}
+.woocommerce.wc-block-catalog-sorting select.orderby {
+	box-sizing: border-box;
+	padding: 10px;
+	font-family: var(--wp--preset--font-family--sitefont) !important;
+}
+.wc-block-cart-link {
+	border-width: 0;
+	font-family: inherit;
+	font-size: var(--wp--preset--font-size--medium);
+	font-style: inherit;
+	font-weight: 600;
+	letter-spacing: inherit;
+	line-height: inherit;
+	padding-top: 0.75rem !important;
+	padding-right: 2.25rem !important;
+	padding-bottom: 0.75rem !important;
+	padding-left: 2.25rem !important;
+	text-decoration: none;
+	text-transform: inherit;
+	border-radius: 9999px !important;
+	background-color: var(--wp--preset--color--background-light) !important;
+}
+.woocommerce-account .wp-block-post-title,
+.woocommerce-account main .woocommerce,
+.woocommerce-cart .wp-block-post-title,
+.woocommerce-cart main .woocommerce,
+.woocommerce-checkout .wp-block-post-title,
+.woocommerce-checkout main .woocommerce {
+	max-width: var(--wp--style--global--wide-size);
 }

@@ -8,3 +8,20 @@
 	padding-right: var(--wp--style--root--padding-right);
 	padding-left: var(--wp--style--root--padding-left);
 }
+.wc-block-cart-link {
+	border-width: 0;
+	font-family: inherit;
+	font-size: var(--wp--preset--font-size--medium);
+	font-style: inherit;
+	font-weight: 600;
+	letter-spacing: inherit;
+	line-height: inherit;
+	padding-top: 0.75rem !important;
+	padding-right: 2.25rem !important;
+	padding-bottom: 0.75rem !important;
+	padding-left: 2.25rem !important;
+	text-decoration: none;
+	text-transform: inherit;
+	border-radius: 9999px !important;
+	background-color: var(--wp--preset--color--background-light) !important;
+}
