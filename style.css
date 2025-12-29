@@ -31,6 +31,9 @@ header.wp-block-template-part {
 header.wp-block-template-part.header-scrolled {
 	top: -220px;
 }
+header.wp-block-template-part.immediate-scroll {
+	box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+}
 
 /* Contact form styles */
 form.wpcf7-form .wpcf7-form-control {
@@ -67,17 +70,6 @@ form.wpcf7-form.init
 	margin-right: 0;
 	margin-left: 0;
 }
-
-@media (width < 600px) {
-	.hide-in-mobile {
-		display: none;
-	}
-	.custom-logo-link {
-		width: 100%;
-		text-align: center;
-	}
-}
-
 .woocommerce div.product div.images .woocommerce-product-gallery__image a {
 	border-radius: 15px;
 	border: 1px solid #eee;
@@ -142,4 +134,59 @@ form.wpcf7-form.init
 .woocommerce-checkout .wp-block-post-title,
 .woocommerce-checkout main .woocommerce {
 	max-width: var(--wp--style--global--wide-size);
+}
+.wc-block-product-template__responsive {
+	grid-gap: 2.25em;
+	display: grid;
+}
+.woocommerce div.product form.cart .variations select {
+	border: 1px solid #c6d0e9;
+	border-radius: 6px;
+}
+.woocommerce table.shop_attributes th {
+	text-align: left;
+}
+.woocommerce-variation-price .price .woocommerce-Price-amount.amount bdi {
+	font-size: var(--wp--preset--font-size--x-large) !important;
+	color: var(--wp--preset--color--accent-red);
+}
+
+@media (width < 600px) {
+	.hide-in-mobile {
+		display: none;
+	}
+	.custom-logo-link {
+		width: 100%;
+		text-align: center;
+	}
+	#inner-page-testimonials.testimonial-section {
+		flex-direction: column;
+	}
+	#inner-page-testimonials.testimonial-section .testimonial-card {
+		justify-content: center;
+		flex-direction: column;
+	}
+	#inner-page-testimonials.testimonial-section
+		.testimonial-card
+		.testimonial-image {
+		width: 32px;
+		margin: 0 auto;
+	}
+	#inner-page-testimonials.testimonial-section
+		.testimonial-card
+		.testimonial-content
+		.blockquote {
+		text-align: center;
+	}
+}
+
+.pswp--animated-in .pswp__bg {
+	background: rgba(255, 255, 255, 0.95) !important;
+}
+.pswp__ui--fit .pswp__caption,
+.pswp__ui--fit .pswp__top-bar {
+	background-color: rgba(0, 0, 0, 1) !important;
+}
+.pswp__button.pswp__button--close {
+	background-color: var(--wp--preset--color--accent-red) !important;
 }

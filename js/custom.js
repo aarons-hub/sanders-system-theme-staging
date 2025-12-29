@@ -9,11 +9,59 @@
 		});
 	}
 
+	// Add 'immediate-scroll' class to header on first scroll
+	let immediateScrollAdded = false;
+	window.addEventListener("scroll", function onFirstScroll() {
+		if (!immediateScrollAdded) {
+			var header = document.querySelector("header.wp-block-template-part");
+			if (header) {
+				header.classList.add("immediate-scroll");
+			}
+			immediateScrollAdded = true;
+			window.removeEventListener("scroll", onFirstScroll);
+		}
+	});
+
+	// Add/remove 'immediate-scroll' class to header on scroll (using GSAP ScrollTrigger if available)
+	function setImmediateScrollClass(add) {
+		var header = document.querySelector("header.wp-block-template-part");
+		if (header) {
+			if (add) {
+				header.classList.add("immediate-scroll");
+			} else {
+				header.classList.remove("immediate-scroll");
+			}
+		}
+	}
+
+	if (typeof ScrollTrigger !== "undefined") {
+		ScrollTrigger.create({
+			trigger: "body",
+			start: "top top",
+			end: "bottom bottom",
+			onUpdate: (self) => {
+				if (self.scroll() > 0) {
+					setImmediateScrollClass(true);
+				} else {
+					setImmediateScrollClass(false);
+				}
+			},
+		});
+	} else {
+		window.addEventListener("scroll", function () {
+			if (window.scrollY > 0) {
+				setImmediateScrollClass(true);
+			} else {
+				setImmediateScrollClass(false);
+			}
+		});
+	}
+
 	// Toggle a class on header when scrolling past a certain point
 	if (typeof ScrollTrigger !== "undefined") {
 		ScrollTrigger.create({
 			trigger: "header.wp-block-template-part",
-			start: "top+=600 top",
+			start: "top+=300 top",
 			end: "top+=1000 top",
 			scrub: true,
 			markers: false,
