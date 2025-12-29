@@ -86,18 +86,18 @@ jobs:
           git push origin HEAD:deploy-pr --force
 
       - name: Create or update Pull Request to main
-        uses: peter-evans/create-pull-request@v6
-        with:
-          token: ${{ secrets.DEV_REPO_TOKEN }}
-          repository: ${{ steps.staging-repo.outputs.repo }}
-          base: main
-          head: deploy-pr
-          title: "Deploy: PR from dev branch"
-          body: |
-            This PR was automatically created by the deploy-to-staging workflow.
-            Please review and approve to deploy to staging.
-          commit-message: "Deploy from dev branch"
-          delete-branch: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.DEV_REPO_TOKEN }}
+        run: |
+          cd staging
+          # Check if PR already exists
+          PR_URL=$(gh pr list --repo ${{ steps.staging-repo.outputs.repo }} --head deploy-pr --json url --jq '.[0].url')
+          if [ -z "$PR_URL" ]; then
+            gh pr create --repo ${{ steps.staging-repo.outputs.repo }} --base main --head deploy-pr --title "Deploy: PR from dev branch" --body "This PR was automatically created by the deploy-to-staging workflow. Please review and approve to deploy to staging."
+          else
+            echo "PR already exists: $PR_URL"
+          fi
+        continue-on-error: true
 
       - name: Deployment summary
         if: success()
