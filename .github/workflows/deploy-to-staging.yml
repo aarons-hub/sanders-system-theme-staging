@@ -68,7 +68,7 @@ jobs:
           cd ..
           rsync -av --delete --exclude='.git' dev/ staging/
 
-      - name: Commit and push to staging
+      - name: Commit and push to staging PR branch
         env:
           STAGING_REPO_TOKEN: ${{ secrets.DEV_REPO_TOKEN }}
         run: |
@@ -82,32 +82,31 @@ jobs:
           git add -A
           COMMIT_MSG="Deploy from dev branch"
           git commit -m "${COMMIT_MSG}"
-          REMOTE_BRANCHES=$(git ls-remote --heads origin 2>/dev/null | wc -l)
-          if [ "$REMOTE_BRANCHES" -eq 0 ]; then
-            git branch -M main
-            git push -u origin main
-          else
-            DEFAULT_BRANCH=$(git remote show origin | grep 'HEAD branch' | cut -d' ' -f5)
-            if [ -z "$DEFAULT_BRANCH" ]; then
-              DEFAULT_BRANCH="main"
-            fi
-            git push origin HEAD:${DEFAULT_BRANCH}
-          fi
-          if [ $? -eq 0 ]; then
-            echo "Successfully deployed to staging!"
-            echo "Commit SHA: $(git rev-parse --short HEAD)"
-          else
-            echo "Error: Failed to push to staging repository"
-            exit 1
-          fi
+          # Always push to deploy-pr branch for PR approval
+          git push origin HEAD:deploy-pr --force
+
+      - name: Create or update Pull Request to main
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.DEV_REPO_TOKEN }}
+          repository: ${{ steps.staging-repo.outputs.repo }}
+          base: main
+          head: deploy-pr
+          title: "Deploy: PR from dev branch"
+          body: |
+            This PR was automatically created by the deploy-to-staging workflow.
+            Please review and approve to deploy to staging.
+          commit-message: "Deploy from dev branch"
+          delete-branch: false
 
       - name: Deployment summary
         if: success()
         run: |
-          echo "## Deployment Successful!  :rocket:" >> $GITHUB_STEP_SUMMARY
+          echo "## Deployment PR Created!  :rocket:" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Staging Repository:** ${{ steps.staging-repo.outputs.repo }}" >> $GITHUB_STEP_SUMMARY
-          echo "**Deployed at:** $(date -u +"%Y-%m-%d %H:%M:%S UTC")" >> $GITHUB_STEP_SUMMARY
+          echo "**Pull Request:** See staging repo PRs" >> $GITHUB_STEP_SUMMARY
+          echo "**Created at:** $(date -u +"%Y-%m-%d %H:%M:%S UTC")" >> $GITHUB_STEP_SUMMARY
 
       - name: Deployment failure notification
         if: failure()
