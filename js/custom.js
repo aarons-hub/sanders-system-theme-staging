@@ -244,4 +244,56 @@
 			});
 		});
 	});
+
+	// Swatch injection for table.variations select elements
+	$(document).ready(function () {
+		setTimeout(function () {
+			$("table.variations select").each(function () {
+				var $select = $(this);
+				$select.addClass("wpss-hidden");
+
+				var attrName =
+					$select.data("attribute_name") || $select.attr("name") || "";
+				var $options = $select.find("option");
+
+				var $swatchContainer = $('<div class="wpss-product-container"></div>');
+				if (attrName) {
+					$swatchContainer.attr("swatches-attr", attrName);
+				}
+
+				$options.each(function () {
+					var $option = $(this);
+					var value = $option.attr("value");
+					var label = $option.text();
+					if (!value) return;
+
+					var isSelected = $option.is(":selected");
+					var $swatch = $("<div></div>")
+						.addClass("wpss-swatches-option wpss-label-option")
+						.attr("data-slug", value)
+						.attr("data-title", label);
+
+					if (isSelected) {
+						$swatch.addClass("wpss-selected-swatch");
+					}
+
+					$swatch.append(
+						$('<div class="wpss-swatch-inner"></div>').text(label),
+					);
+					$swatchContainer.append($swatch);
+				});
+
+				$select.after($swatchContainer);
+				$swatchContainer.on("click", ".wpss-swatches-option", function () {
+					var $clicked = $(this);
+					var value = $clicked.attr("data-slug");
+					$swatchContainer
+						.find(".wpss-swatches-option")
+						.removeClass("wpss-selected-swatch");
+					$clicked.addClass("wpss-selected-swatch");
+					$select.val(value).trigger("change");
+				});
+			});
+		}, 1000);
+	});
 })();
