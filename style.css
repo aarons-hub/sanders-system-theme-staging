@@ -1,5 +1,5 @@
 /*
-Theme Name: Sanders System v1.0.1
+Theme Name: Sanders System v1.0.2
 Description: Based on Twenty Twenty-Five
 Author: Aaron Sanders
 Version: 1.0.2
@@ -105,6 +105,9 @@ form.wpcf7-form.init
 .wcpa_wrap .wcpa_field_wrap {
 	margin: 0 0 30px;
 }
+.wcpa_wrap .wcpa-col-3 {
+	width: 33% !important;
+}
 .woocommerce.wc-block-catalog-sorting select.orderby {
 	box-sizing: border-box;
 	padding: 10px;
@@ -189,4 +192,36 @@ form.wpcf7-form.init
 }
 .pswp__button.pswp__button--close {
 	background-color: var(--wp--preset--color--accent-red) !important;
+}
+select.wpss-hidden {
+	display: none !important;
+}
+.wpss-product-container {
+	display: flex;
+	gap: 8px;
+	font-weight: 400;
+	flex-wrap: wrap;
+}
+.wpss-swatches-option.wpss-label-option {
+	border: 1px solid #c6d0e9;
+	border-radius: 4px;
+	padding: 1px 10px;
+	box-sizing: border-box;
+	cursor: pointer;
+	color: #333;
+}
+.wpss-swatches-option.wpss-label-option.wpss-selected-swatch {
+	border: 1px solid #4ab866;
+	font-weight: 600;
+	color: #000;
+	background-color: #f4fff7;
+}
+.variations_form.cart .variations tr {
+	display: flex;
+	flex-direction: column;
+}
+.reset_variations {
+	margin-top: 14px;
+	display: block;
+	width: fit-content;
 }
